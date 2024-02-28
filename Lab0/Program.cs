@@ -4,7 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        FizzBuzz lab0 = new FizzBuzz(20);
+        lab0.printvals();
     }
 }
 

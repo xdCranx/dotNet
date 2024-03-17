@@ -39,7 +39,7 @@ namespace Lab1
         public override string ToString()
         {
 			String temp = new String("");
-			foreach (int i in items) { temp += (i.ToString() + " "); };
+			foreach (int i in items) { temp += (i.ToString() + "\r\n"); };
 			return temp;
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-[assembly: InternalsVisibleTo("Lab1_Test")]
+[assembly: InternalsVisibleTo("Lab1_Test"),
+	InternalsVisibleTo("Lab1_GUI"),
+	InternalsVisibleTo("TestProject1")]
 
 namespace Lab1
 {
@@ -61,7 +63,7 @@ namespace Lab1
 			
             for (int i = 0; i < n; i++)
             {
-				temp += ("|id: " + items[i].GetId() + "|v: " + items[i].GetValue() + "|w: " + items[i].GetWeight() + "|ratio: " + items[i].GetRatio() + "|\n");
+				temp += ("|id: " + items[i].GetId() + "|v: " + items[i].GetValue() + "|w: " + items[i].GetWeight() + "|ratio: " + items[i].GetRatio() + "|\r\n");
                 
             }
             return temp;

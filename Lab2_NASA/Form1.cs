@@ -16,38 +16,46 @@ namespace Lab2_NASA
         }
         private async void btnLoad_Click(object sender, EventArgs e)
         {
-            string date = txtDate.Text; // Get the date from the textbox
+            string dateString = txtDate.Text; // Get the date from the textbox
 
             // Validate date format
-            if (!DateTime.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            if (!DateTime.TryParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
             {
                 MessageBox.Show("Invalid date format. Please use YYYY-MM-DD format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            await LoadImage(date);
+            await LoadImage(dateString);
         }
 
-        private async Task LoadImage(string date)
+        private async Task LoadImage(string dateString)
         {
-            string url = string.Format(ApodApiUrl, ApiKey, date);
-
-            using (HttpClient client = new HttpClient())
+            using (var context = new APODsDB())
             {
-                string json = await client.GetStringAsync(url);
-                var apod = JsonSerializer.Deserialize<APOD>(json);
-                pictureBox.LoadAsync(apod.url);
-                urlBox.Text = apod.url;
-                titleBox.Text = apod.title;
-                explanationBox.Text = apod.explanation;
+                DateTime date = DateTime.ParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                var apod = context.APODs.FirstOrDefault(a => a.date == date);
+                if (apod == null)
+                {
+                    string url = string.Format(ApodApiUrl, ApiKey, date);
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        string json = await client.GetStringAsync(url);
+                        apod = JsonSerializer.Deserialize<APOD>(json);
+                        pictureBox.LoadAsync(apod.url);
+                        urlBox.Text = apod.url;
+                        titleBox.Text = apod.title;
+                        explanationBox.Text = apod.explanation;
+                    }
+                }
+                else
+                {
+                    pictureBox.ImageLocation = apod.url;
+                    titleBox.Text = apod.title;
+                    explanationBox.Text = apod.explanation;
+                }
             }
         }
     }
 }
 
-public class APOD
-{
-    public string url { get; set; }
-    public string title { get; set; }
-    public string explanation { get; set; }
-}

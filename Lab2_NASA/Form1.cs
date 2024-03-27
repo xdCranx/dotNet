@@ -36,16 +36,17 @@ namespace Lab2_NASA
                 var apod = context.APODs.FirstOrDefault(a => a.date == date);
                 if (apod == null)
                 {
-                    string url = string.Format(ApodApiUrl, ApiKey, date);
-
+                    string url = string.Format(ApodApiUrl, ApiKey, dateString);
+                    urlBox.Text = url;
                     using (HttpClient client = new HttpClient())
                     {
                         string json = await client.GetStringAsync(url);
                         apod = JsonSerializer.Deserialize<APOD>(json);
                         pictureBox.LoadAsync(apod.url);
-                        urlBox.Text = apod.url;
                         titleBox.Text = apod.title;
                         explanationBox.Text = apod.explanation;
+                        context.APODs.Add(apod);
+                        context.SaveChanges();
                     }
                 }
                 else

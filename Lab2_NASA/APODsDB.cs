@@ -13,7 +13,7 @@ namespace Lab2_NASA
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=apods.db");
+            optionsBuilder.UseSqlite("Data Source=C:\\Users\\luksok3413\\source\\repos\\xdCranx\\dotNet\\Lab2_NASA\\apods.db");
         }
     }
 }

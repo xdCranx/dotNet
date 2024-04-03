@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab1_GUI", "Lab1_GUI\Lab1_G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab2", "Lab2\Lab2.csproj", "{E0C7CD75-F422-4B93-9CB4-FD2744CD54BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2_NASA", "Lab2_NASA\Lab2_NASA.csproj", "{2804063C-DC3E-4A4F-A47E-750F3B68FA41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab2_NASA", "Lab2_NASA\Lab2_NASA.csproj", "{2804063C-DC3E-4A4F-A47E-750F3B68FA41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab3", "Lab3\Lab3.csproj", "{F6D9F318-43C3-4F60-959A-227156EA8197}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2804063C-DC3E-4A4F-A47E-750F3B68FA41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2804063C-DC3E-4A4F-A47E-750F3B68FA41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2804063C-DC3E-4A4F-A47E-750F3B68FA41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D9F318-43C3-4F60-959A-227156EA8197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D9F318-43C3-4F60-959A-227156EA8197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D9F318-43C3-4F60-959A-227156EA8197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D9F318-43C3-4F60-959A-227156EA8197}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

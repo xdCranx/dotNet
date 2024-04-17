@@ -40,17 +40,19 @@ namespace Lab3
             return column;
         }
         
-        
+
         public Matrix(int size, int threads)
         {
             this.size = size;
             threadCount = threads;
             matrix = new int[size, size];
         }
+
         public void SetMatrix(int[,] matrix)
         {
             this.matrix = matrix;
         }
+
         public void FillMatrix()
         {
             Random random = new Random();
@@ -89,7 +91,7 @@ namespace Lab3
         {
             Matrix result = new Matrix(size, threadCount);
             Thread[] threads = new Thread[threadCount];
-
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < threadCount; i++)
             {
                 int start = i * size / threadCount;
@@ -112,24 +114,28 @@ namespace Lab3
             {
                 threads[i].Join();
             }
+            watch.Stop();
+            Console.WriteLine($"|Execution Time: {watch.ElapsedMilliseconds} ms|");
             return result;
         }
 
-        public void threadMultiplyMatrix(int[,] matrix2)
+        public Matrix threadMultiplyMatrix(Matrix matrix2)
         {
-            int[,] result = new int[size, size];
+            Matrix result = new Matrix(size, threadCount);
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Parallel.For(0, size, new ParallelOptions { MaxDegreeOfParallelism = threadCount }, i =>
             {
                 for (int j = 0; j < size; j++)
                 {
-                    result[i, j] = 0;
                     for (int k = 0; k < size; k++)
                     {
-                        result[i, j] += matrix[i, k] * matrix2[k, j];
+                        result.matrix[j, k] = Multiply(GetRow(j), matrix2.GetColumn(k));
                     }
                 }
             });
-            matrix = result;
+            watch.Stop();
+            Console.WriteLine($"|Execution Time: {watch.ElapsedMilliseconds} ms|");
+            return result;
         }
     }
 }

@@ -46,9 +46,10 @@
             // pictureBox1
             // 
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(12, 135);
+            pictureBox1.Location = new Point(8, 81);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(800, 800);
+            pictureBox1.Size = new Size(561, 481);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -56,9 +57,10 @@
             // pictureBox2
             // 
             pictureBox2.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox2.Location = new Point(911, 202);
+            pictureBox2.Location = new Point(638, 121);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(350, 350);
+            pictureBox2.Size = new Size(246, 211);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
@@ -66,9 +68,10 @@
             // pictureBox3
             // 
             pictureBox3.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox3.Location = new Point(911, 587);
+            pictureBox3.Location = new Point(638, 352);
+            pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(350, 350);
+            pictureBox3.Size = new Size(246, 211);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 2;
             pictureBox3.TabStop = false;
@@ -76,9 +79,10 @@
             // pictureBox4
             // 
             pictureBox4.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox4.Location = new Point(1297, 202);
+            pictureBox4.Location = new Point(908, 121);
+            pictureBox4.Margin = new Padding(2);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(350, 350);
+            pictureBox4.Size = new Size(246, 211);
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 3;
             pictureBox4.TabStop = false;
@@ -86,9 +90,10 @@
             // pictureBox5
             // 
             pictureBox5.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox5.Location = new Point(1297, 587);
+            pictureBox5.Location = new Point(908, 352);
+            pictureBox5.Margin = new Padding(2);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(350, 350);
+            pictureBox5.Size = new Size(246, 211);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 4;
             pictureBox5.TabStop = false;
@@ -100,9 +105,10 @@
             // 
             // loadButton
             // 
-            loadButton.Location = new Point(273, 39);
+            loadButton.Location = new Point(191, 23);
+            loadButton.Margin = new Padding(2);
             loadButton.Name = "loadButton";
-            loadButton.Size = new Size(171, 73);
+            loadButton.Size = new Size(120, 44);
             loadButton.TabIndex = 5;
             loadButton.Text = "Load";
             loadButton.UseVisualStyleBackColor = true;
@@ -110,9 +116,10 @@
             // 
             // actionButton
             // 
-            actionButton.Location = new Point(1192, 113);
+            actionButton.Location = new Point(834, 68);
+            actionButton.Margin = new Padding(2);
             actionButton.Name = "actionButton";
-            actionButton.Size = new Size(170, 66);
+            actionButton.Size = new Size(119, 40);
             actionButton.TabIndex = 6;
             actionButton.Text = "Start Process";
             actionButton.UseVisualStyleBackColor = true;
@@ -120,9 +127,9 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1659, 947);
+            ClientSize = new Size(1161, 568);
             Controls.Add(actionButton);
             Controls.Add(loadButton);
             Controls.Add(pictureBox5);
@@ -130,6 +137,7 @@
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
+            Margin = new Padding(2);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

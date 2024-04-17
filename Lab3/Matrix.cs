@@ -87,7 +87,7 @@ namespace Lab3
             return size;
         }
 
-        public Matrix MultiplyMatrix(Matrix matrix2)
+        public Tuple<Matrix, long> MultiplyMatrix(Matrix matrix2)
         {
             Matrix result = new Matrix(size, threadCount);
             Thread[] threads = new Thread[threadCount];
@@ -116,26 +116,23 @@ namespace Lab3
             }
             watch.Stop();
             Console.WriteLine($"|Execution Time: {watch.ElapsedMilliseconds} ms|");
-            return result;
+            return Tuple.Create(result, watch.ElapsedMilliseconds);
         }
 
-        public Matrix threadMultiplyMatrix(Matrix matrix2)
+        public Tuple<Matrix, long> threadMultiplyMatrix(Matrix matrix2)
         {
             Matrix result = new Matrix(size, threadCount);
             var watch = System.Diagnostics.Stopwatch.StartNew();
             Parallel.For(0, size, new ParallelOptions { MaxDegreeOfParallelism = threadCount }, i =>
             {
-                for (int j = 0; j < size; j++)
-                {
                     for (int k = 0; k < size; k++)
                     {
-                        result.matrix[j, k] = Multiply(GetRow(j), matrix2.GetColumn(k));
+                        result.matrix[i, k] = Multiply(GetRow(i), matrix2.GetColumn(k));
                     }
-                }
             });
             watch.Stop();
             Console.WriteLine($"|Execution Time: {watch.ElapsedMilliseconds} ms|");
-            return result;
+            return Tuple.Create(result, watch.ElapsedMilliseconds);
         }
     }
 }

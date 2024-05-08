@@ -38,17 +38,7 @@
                 <label for="releasedate" class="form-label">ReleaseDate:</label> 
                 <InputDate id="releasedate" @bind-Value="Game.ReleaseDate" class="form-control" /> 
                 <ValidationMessage For="() => Game.ReleaseDate" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="numofreviews" class="form-label">NumOfReviews:</label> 
-                <InputNumber id="numofreviews" @bind-Value="Game.NumOfReviews" class="form-control" /> 
-                <ValidationMessage For="() => Game.NumOfReviews" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="avgrating" class="form-label">AvgRating:</label> 
-                <InputNumber id="avgrating" @bind-Value="Game.AvgRating" class="form-control" /> 
-                <ValidationMessage For="() => Game.AvgRating" class="text-danger" /> 
-            </div>        
+            </div>                   
             <div class="mb-3">
                 <label for="imgurl" class="form-label">ImgUrl:</label> 
                 <InputText id="imgurl" @bind-Value="Game.ImgUrl" class="form-control" /> 

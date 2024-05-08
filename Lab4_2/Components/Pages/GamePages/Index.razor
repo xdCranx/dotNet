@@ -1,0 +1,90 @@
+﻿@page "/games"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using Microsoft.EntityFrameworkCore
+@inject Lab4_2.Data.ApplicationDbContext DB
+@using Lab4_2.Components.Model
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<PageTitle>Game Page</PageTitle>
+
+<h1>Game Page</h1>
+
+<p>
+    <a href="games/create">Add New</a>
+</p>
+
+@if (fetchedGameList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in displayedGameList)
+            {
+                <tr>
+                    <td>@game.Title</td>
+                    <td>@game.Genre</td>
+                    <td>@game.Price</td>
+
+                    <td>
+                        <AuthorizeView>
+                            <Authorized>
+                                <a href="@($"games/edit?id={game.Id}")">Edit</a> |
+                            </Authorized>
+                        </AuthorizeView>
+
+                        <a href="@($"games/details?id={game.Id}")">Details</a>
+                        <AuthorizeView>
+                            <Authorized>
+                                | <a href="@($"games/delete?id={game.Id}")">Delete</a>
+                            </Authorized>
+                        </AuthorizeView>
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+<button type="button" class="btn btn-primary" @onclick="sortByReleaseDate">Sort by Release Date</button>
+<button type="button" class="btn btn-primary" @onclick="sortByPrice">Sort by Price</button>
+<button type="button" class="btn btn-primary" @onclick="removeSort">Remove sorting</button>
+
+@code
+{
+    List<Game> fetchedGameList = new List<Game>();
+    List<Game> displayedGameList = new List<Game>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        fetchedGameList = await DB.Games.ToListAsync();
+        displayedGameList = fetchedGameList;
+    }
+
+    private void sortByReleaseDate()
+    {
+        displayedGameList = fetchedGameList.OrderBy(x => x.ReleaseDate).ToList();
+    }
+
+    private void sortByPrice()
+    {
+        displayedGameList = fetchedGameList.OrderBy(x => x.Price).ToList();
+    }
+
+    private void removeSort()
+    {
+        displayedGameList = fetchedGameList;
+    }
+}

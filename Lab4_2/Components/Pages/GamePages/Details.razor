@@ -1,0 +1,120 @@
+﻿@page "/games/details"
+@inject Lab4_2.Data.ApplicationDbContext DB
+@using Lab4_2.Components.Model
+@inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Game</h4>
+    <hr />
+    @if (game is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <img src="@game.ImgUrl" width="350px" height="350px" />
+        <dl class="row">
+            <dt class="col-sm-2">Title</dt>
+            <dd class="col-sm-10">@game.Title</dd>
+            <dt class="col-sm-2">Genre</dt>
+            <dd class="col-sm-10">@game.Genre</dd>
+            <dt class="col-sm-2">Platform</dt>
+            <dd class="col-sm-10">@game.Platform</dd>
+            <dt class="col-sm-2">Price</dt>
+            <dd class="col-sm-10">@game.Price</dd>
+            <dt class="col-sm-2">ReleaseDate</dt>
+            <dd class="col-sm-10">@game.ReleaseDate</dd>
+            <dt class="col-sm-2">Rating</dt>
+            <dd class="col-sm-10">@game.AvgRating</dd>
+            <dt class="col-sm-2">Number of ratings</dt>
+            <dd class="col-sm-10">@game.NumOfReviews</dd>
+
+        </dl>
+        <div>
+            <AuthorizeView>
+                <Authorized>
+                    <a href="@($"/games/edit?id={game.Id}")">Edit</a> |
+                </Authorized>
+            </AuthorizeView>
+            <a href="@($"/games")">Back to List</a>
+        </div>
+    }
+</div>
+
+<AuthorizeView>
+    <Authorized>
+        <input type="number" style="width=100px"
+            @bind="rating" min="0" max="10" step="0.1"
+            class = "form-control" 
+            placeholder = "Rating"/>
+
+            <button class="btn btn-primary" @onclick="RateGame">Rate</button>
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    Game? game;
+    int? rating;
+
+    [SupplyParameterFromQuery]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        game = await DB.Games.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (game is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private void InputRating(ChangeEventArgs e)
+    {
+        try
+        {
+            rating = Convert.ToInt32(e.Value);
+        }
+        catch (Exception)
+        {
+            rating = null;
+        }
+
+        if(rating>5)
+        {
+            rating = 5;
+        }
+        else if(rating<0)
+        {
+            rating = 0;
+        }
+    }
+
+    private void RateGame()
+    {
+        if (rating is null)
+        {
+            return;
+        }
+        if(game.AvgRating == 0 || game.NumOfReviews == 0)
+        {
+            game.AvgRating = rating.Value;
+            game.NumOfReviews = 1;
+        }
+        else
+        {
+            game.AvgRating = (game.AvgRating * game.NumOfReviews + rating.Value) / (game.NumOfReviews + 1);
+            game.NumOfReviews++;
+        }
+
+        DB.Games.Update(game);
+        DB.SaveChanges();
+    }
+}
